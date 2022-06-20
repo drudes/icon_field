@@ -1,0 +1,9 @@
+name: Icon
+description: Defines a field for attaching an icon to a fieldable entity.
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: Field types
+type: module
+dependencies:
+  - icon_bundle_api
+  - drupal:field

@@ -1,0 +1,10 @@
+{#
+  Icon Field Twig template for displaying the icon
+#}
+{% if link is not empty %}
+  <a href="{{ link }}" target="_blank">
+{% endif %}
+{{ content }}
+{% if link is not empty %}
+  </a>
+{% endif %}
