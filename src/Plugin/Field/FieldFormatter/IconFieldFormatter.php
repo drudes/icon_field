@@ -57,11 +57,12 @@ class IconFieldFormatter extends FormatterBase
         foreach ($items as $delta => $item) {
             $bundle = IconBundleManager::getIconBundle($item->bundle);
             $elements[$delta] = [
-                '#theme'     => 'icon_field',
-                '#link'      => $item->icon_link,
-                '#content'   => [ '#type' => $bundle['icon_element'] ] + self::propertize($item->icon_spec),
+                '#theme'   => 'icon_field',
+                '#link'    => $item->icon_link,
+                '#content' => ['#type' => $bundle['icon_element']] + self::propertize($item->icon_spec),
             ];
         }
+
         return $elements;
     }
 
@@ -69,12 +70,13 @@ class IconFieldFormatter extends FormatterBase
     {
         $result = [];
         foreach ($array as $key => $value) {
-            $prop_key = (string)$key;
+            $prop_key = (string) $key;
             if ('#' !== substr($prop_key, 0, 1)) {
-                $prop_key = '#' . $prop_key;
+                $prop_key = '#'.$prop_key;
             }
             $result[$prop_key] = $value;
         }
+
         return $result;
     }
 }

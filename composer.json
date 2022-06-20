@@ -1,6 +1,6 @@
 {
     "name": "drupal/icon_field",
-    "description": "Drupal module providing Icon Bundle API",
+    "description": "Drupal module providing Icon Field based on Icon Bundle API",
     "type": "drupal-module",
     "license": "GPL-2.0+",
     "minimum-stability": "dev",
