@@ -1,4 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+/**
+ * @file
+ */
+
+declare(strict_types=1);
 
 /**
  * Implements hook_theme().
@@ -8,17 +14,18 @@
  * @param mixed $theme
  * @param mixed $path
  */
-function icon_field_theme($existing, $type, $theme, $path)
-{
-    return [
-        'icon_field' => [
-            'render element' => 'element',
-        ],
-    ];
+function icon_field_theme($existing, $type, $theme, $path) {
+  return [
+    'icon_field' => [
+      'render element' => 'element',
+    ],
+  ];
 }
 
-function icon_field_preprocess_icon_field(&$variables)
-{
-    $variables['link'] = $variables['element']['#link'] ?? '';
-    $variables['content'] = $variables['element']['#content'] ?? [];
+/**
+ *
+ */
+function icon_field_preprocess_icon_field(&$variables) {
+  $variables['link'] = $variables['element']['#link'] ?? '';
+  $variables['content'] = $variables['element']['#content'] ?? [];
 }

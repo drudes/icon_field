@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Drupal\icon_field\Plugin\Field\FieldType;
 
@@ -20,75 +22,69 @@ use Drupal\Core\TypedData\MapDataDefinition;
  *  default_formatter = "icon_field_formatter"
  * )
  */
-class IconFieldItem extends FieldItemBase
-{
-    /**
-     * {@inheritdoc}
-     */
-    public static function schema(FieldStorageDefinitionInterface $field_definition)
-    {
-        return [
-            'columns' => [
-                'bundle' => [
-                    'type'     => 'varchar',
-                    'length'   => 64,
-                    'not null' => true,
-                ],
-                'icon_spec' => [
-                    'type'      => 'blob',
-                    'not null'  => true,
-                    'serialize' => true,
-                ],
-                'use_link' => [
-                    'type'     => 'int',
-                    'size'     => 'tiny',
-                    'not null' => true,
-                ],
-                'icon_link' => [
-                    'type'     => 'text',
-                    'size'     => 'normal',
-                    'not null' => true,
-                ],
-            ],
-        ];
-    }
+class IconFieldItem extends FieldItemBase {
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition)
-    {
-        $properties = [];
-        $properties['bundle'] = DataDefinition::create('string')
-            ->setLabel(t('Icon Bundle'))
-            ->setDescription(t('Machine name of the icon bundle.'))
-        ;
+  /**
+   * {@inheritdoc}
+   */
+  public static function schema(FieldStorageDefinitionInterface $field_definition) {
+    return [
+      'columns' => [
+        'bundle' => [
+          'type'     => 'varchar',
+          'length'   => 64,
+          'not null' => TRUE,
+        ],
+        'icon_spec' => [
+          'type'      => 'blob',
+          'not null'  => TRUE,
+          'serialize' => TRUE,
+        ],
+        'use_link' => [
+          'type'     => 'int',
+          'size'     => 'tiny',
+          'not null' => TRUE,
+        ],
+        'icon_link' => [
+          'type'     => 'text',
+          'size'     => 'normal',
+          'not null' => TRUE,
+        ],
+      ],
+    ];
+  }
 
-        $properties['icon_spec'] = MapDataDefinition::create('map')
-            ->setLabel(t('Icon Specification'))
-            ->setDescription(t('JSON encoded icon specification.'))
-        ;
+  /**
+   * {@inheritdoc}
+   */
+  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
+    $properties = [];
+    $properties['bundle'] = DataDefinition::create('string')
+      ->setLabel(t('Icon Bundle'))
+      ->setDescription(t('Machine name of the icon bundle.'));
 
-        $properties['use_link'] = DataDefinition::create('boolean')
-            ->setLabel(t('Wrap Link around the Icon'))
-            ->setDescription(t('Wrapping the link around the icon.'))
-        ;
+    $properties['icon_spec'] = MapDataDefinition::create('map')
+      ->setLabel(t('Icon Specification'))
+      ->setDescription(t('JSON encoded icon specification.'));
 
-        $properties['icon_link'] = DataDefinition::create('string')
-            ->setLabel(t('Icon Link'))
-            ->setDescription(t('Link to wrap around the icon.'))
-        ;
+    $properties['use_link'] = DataDefinition::create('boolean')
+      ->setLabel(t('Wrap Link around the Icon'))
+      ->setDescription(t('Wrapping the link around the icon.'));
 
-        return $properties;
-    }
+    $properties['icon_link'] = DataDefinition::create('string')
+      ->setLabel(t('Icon Link'))
+      ->setDescription(t('Link to wrap around the icon.'));
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isEmpty()
-    {
-        $bundle = $this->get('bundle')->getValue();
+    return $properties;
+  }
 
-        return null === $bundle || '' === $bundle;
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function isEmpty() {
+    $bundle = $this->get('bundle')->getValue();
+
+    return NULL === $bundle || '' === $bundle;
+  }
+
 }
