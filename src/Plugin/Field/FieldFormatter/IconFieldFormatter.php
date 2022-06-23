@@ -24,15 +24,21 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 final class IconFieldFormatter extends FormatterBase {
 
   /**
-   * @var IconBundleManagerInterface
+   * @var \Drupal\icon_bundle_api\IconBundleManagerInterface
    */
   protected $iconBundleManager;
 
+  /**
+   *
+   */
   public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, $label, $view_mode, array $third_party_settings, IconBundleManagerInterface $icon_bundle_manager) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
     $this->iconBundleManager = $icon_bundle_manager;
   }
 
+  /**
+   *
+   */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     $icon_bundle_manager = $container->get('plugin.manager.icon_bundle');
     return new self($plugin_id, $plugin_definition, $configuration['field_definiton'], $configuration['settings'], $configuration['label'], $configuration['view_mode'], $configuration['third_party_settings'], $icon_bundle_manager);
@@ -62,7 +68,6 @@ final class IconFieldFormatter extends FormatterBase {
     $elements = [];
 
     foreach ($items as $delta => $item) {
-//--      $bundle = IconBundleManager::getIconBundle($item->bundle);
       $bundle = $this->iconBundleManager->getDefinition($item->bundle);
       $elements[$delta] = [
         '#theme'   => 'icon_field',
