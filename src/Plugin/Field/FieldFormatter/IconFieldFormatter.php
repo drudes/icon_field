@@ -6,6 +6,7 @@ namespace Drupal\icon_field\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\icon_bundle_api\IconBundleManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -20,6 +21,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *    "icon_field"
  *  }
  * )
+ *
+ * @phpstan-type FieldFormatterConfigArray array{
+ *    field_definition: \
+ * }
  */
 final class IconFieldFormatter extends FormatterBase {
 
@@ -37,11 +42,11 @@ final class IconFieldFormatter extends FormatterBase {
   }
 
   /**
-   *
+   * @phpstan-param FieldFormatterConfigArray $configuration
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     $icon_bundle_manager = $container->get('plugin.manager.icon_bundle');
-    return new self($plugin_id, $plugin_definition, $configuration['field_definiton'], $configuration['settings'], $configuration['label'], $configuration['view_mode'], $configuration['third_party_settings'], $icon_bundle_manager);
+    return new self($plugin_id, $plugin_definition, $configuration['field_definition'], $configuration['settings'], $configuration['label'], $configuration['view_mode'], $configuration['third_party_settings'], $icon_bundle_manager);
   }
 
   /**
